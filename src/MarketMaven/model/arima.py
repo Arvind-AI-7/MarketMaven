@@ -3,6 +3,7 @@ import pmdarima as pm
 class Model_ARIMA:
 
     def __init__(self, train_data, test_data):
+        super(Model_ARIMA, self).__init__()
         self.train_data = train_data
         self.test_data = test_data
 
