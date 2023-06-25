@@ -1,25 +1,19 @@
 import yfinance as yf
-
 import datetime
 from datetime import date
 from dateutil.relativedelta import relativedelta
 from sklearn.model_selection import train_test_split
 
-import numpy as np
-import pandas as pd
-
 import warnings
 warnings.filterwarnings("ignore")
 
-class DataGathering():
+class REGDataGathering():
     def __init__(self, company_name):
         self.company_name = company_name
 
     def get_next_weekday(self, start_date):
         current_date = datetime.datetime.strptime(start_date.strftime('%Y-%m-%d'), '%Y-%m-%d').date()
         one_day = datetime.timedelta(days=1)
-
-        print(current_date)
 
         if current_date.weekday() < 5:
             current_date += one_day
@@ -28,8 +22,6 @@ class DataGathering():
             current_date += one_day
         return current_date.strftime('%Y-%m-%d')
 
-    def data_smoothing(self, data, alpha):
-        return data.ewm(alpha=alpha).mean()
 
     def get_data(self,years,split):
 
@@ -38,7 +30,6 @@ class DataGathering():
         years_ago = today - relativedelta(years=years)
         data = yf.download(self.company_name, years_ago, today, progress=False)  # 'RELIANCE.NS'
         data.dropna(inplace=True)
-        data = self.data_smoothing(data, 0.5)
         x = data[['Open', 'High', 'Low', 'Volume']]
         y = data['Adj Close']
 

@@ -1,8 +1,4 @@
 from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import MinMaxScaler
-import torch
-import numpy as np
-
 
 class Model_LINREG:
     def __init__(self, train_x, test_x, train_y, test_y, X_forecast):
