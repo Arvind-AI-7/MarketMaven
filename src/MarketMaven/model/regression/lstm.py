@@ -34,12 +34,10 @@ class Model_LSTM(nn.Module):
         test_x_scaled = self.sc_x.transform(self.test_x)
 
         train_y_scaled = self.sc_y.fit_transform(self.train_y)
-        test_y_scaled = self.sc_y.transform(self.test_y)
 
         train_x_tensor = torch.tensor(train_x_scaled, dtype=torch.float32)
         train_y_tensor = torch.tensor(train_y_scaled, dtype=torch.float32)
         test_x_tensor = torch.tensor(test_x_scaled, dtype=torch.float32)
-        test_y_tensor = torch.tensor(test_y_scaled, dtype=torch.float32)
 
         criterion = nn.MSELoss()
         optimizer = optim.Adam(self.parameters(), lr=0.001)

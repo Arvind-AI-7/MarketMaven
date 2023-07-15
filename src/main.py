@@ -14,8 +14,12 @@ if __name__ == '__main__':
     get_predictions = Get_Predictions(train_x, test_x, train_y, test_y, X_forecast, tomorrow)
     get_predictions.reg_pred()
 
-    #Classification
-    data_gathering = CLFDataGathering(company_name='AAPL')
-    train_x, test_x, train_y, test_y, X_forecast, tomorrow = data_gathering.get_data(years=5, split=0.10)  # years,train_test_split
-    get_predictions = Get_Predictions(train_x, test_x, train_y, test_y, X_forecast, tomorrow)
-    get_predictions.clf_pred()
+    # # Classification
+    # data_gathering = CLFDataGathering(company_name='AAPL')
+    # train_x, test_x, train_y, test_y, X_forecast, tomorrow = data_gathering.get_data(years=5, split=0.10)  # years,train_test_split
+    # get_predictions = Get_Predictions(train_x, test_x, train_y, test_y, X_forecast, tomorrow)
+    # get_predictions.clf_pred()
+    #
+    # # Sentiment Analysis
+    # get_predictions.sent_pred()
+

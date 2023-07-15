@@ -1,6 +1,8 @@
 from MarketMaven.model.regression.lstm import Model_LSTM
 from MarketMaven.model.regression.linreg import Model_LINREG
 from MarketMaven.model.classification.ensemble import Model_ENSEMBLE
+from MarketMaven.model.sentiment.sentiment_analysis import Sentiment_Analysis
+from utils.tickers import Tickers
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -47,7 +49,8 @@ class Get_Predictions:
         plt.legend(loc="upper left", fontsize='small')
         plt.xticks(rotation=45, ha='right')
         plt.tight_layout()
-        plt.show()
+        # plt.show()
+        plt.savefig('src/MarketMaven/screenshots/regression.png')
 
     def clf_pred(self):
         ###################### Ensemble #######################
@@ -57,3 +60,8 @@ class Get_Predictions:
         print("Classification Accuracy: ", round(ensemble_accuracy, 2))
         print(f"Classification forecast for date {self.tomorrow} : {ens_forecast}")
 
+    def sent_pred(self):
+        ###################### Sentiment Analysis #######################
+        tk = Tickers()
+        sa = Sentiment_Analysis(tk.tickers, tk.tickers_sector, tk.tickers_dict, tk.tickers_name, tk.number_of_shares, tk.source_url)
+        sa.sentiment()
