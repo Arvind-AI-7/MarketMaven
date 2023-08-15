@@ -10,3 +10,5 @@ nltk==3.8.1
 kaleido==0.2.1
 tensorflow==2.13.0
 Keras-Preprocessing==1.1.2
+h5py==3.9.0
+pickle5==0.0.12

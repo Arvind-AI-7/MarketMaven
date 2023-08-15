@@ -4,6 +4,9 @@ from MarketMaven.model.regression.lstm_gru_rnn import Model_LSTM_GRU
 from MarketMaven.model.regression.linreg import Model_LINREG
 from MarketMaven.model.classification.ensemble import Model_ENSEMBLE
 from MarketMaven.model.sentiment.sentiment_analysis import Sentiment_Analysis
+from MarketMaven.model.sentiment.sentiment_rnn import Sentiment_RNN
+from MarketMaven.model.sentiment.sentiment_cnn import Sentiment_CNN
+
 from utils.tickers import Tickers
 
 import matplotlib.pyplot as plt
@@ -88,7 +91,9 @@ class Get_Predictions:
     def clf_pred(self):
         ###################### Ensemble #######################
         ens = Model_ENSEMBLE(self.train_x, self.test_x, self.train_y, self.test_y, self.X_forecast)
-        ens_pred, ens_forecast = ens.model()
+        if self.tt_switch == 0:
+            ens.train()
+        ens_pred, ens_forecast = ens.test()
         ensemble_accuracy = accuracy_score(self.test_y.values, ens_pred)
         print("Classification Accuracy: ", round(ensemble_accuracy, 2))
         print(f"Classification forecast for date {self.tomorrow} : {ens_forecast}")
@@ -98,3 +103,15 @@ class Get_Predictions:
         tk = Tickers()
         sa = Sentiment_Analysis(tk.tickers, tk.tickers_sector, tk.tickers_dict, tk.tickers_name, tk.number_of_shares, tk.source_url)
         sa.sentiment()
+
+        ######################## Sentiment RNN ##########################
+        sr = Sentiment_RNN(tk.tickers, tk.tickers_sector, tk.tickers_dict, tk.tickers_name, tk.number_of_shares, tk.source_url)
+        if self.tt_switch == 0:
+            sr.train_sent_rnn()
+        sr.test_sent_rnn()
+
+        ######################## Sentiment CNN ##########################
+        sc = Sentiment_CNN(tk.tickers, tk.tickers_sector, tk.tickers_dict, tk.tickers_name, tk.number_of_shares, tk.source_url)
+        if self.tt_switch == 0:
+            sc.train_sent_cnn()
+        sc.test_sent_cnn()
