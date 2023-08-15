@@ -4,6 +4,9 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 from sklearn.model_selection import train_test_split
 
+import numpy as np
+import pandas as pd
+
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -30,6 +33,8 @@ class REGDataGathering():
         years_ago = today - relativedelta(years=years)
         data = yf.download(self.company_name, years_ago, today, progress=False)  # 'RELIANCE.NS'
         data.dropna(inplace=True)
+
+        #Data
         x = data[['Open', 'High', 'Low', 'Volume']]
         y = data['Adj Close']
 
@@ -38,6 +43,22 @@ class REGDataGathering():
         tomorrow = self.get_next_weekday(current)
         x = x.iloc[:-1, :]
         y = y.iloc[1:]
+
+        #Time
+        # data = data['Adj Close']
+        #
+        # X_forecast = data.iloc[-100:]
+        # current = data.index[-1]
+        # tomorrow = self.get_next_weekday(current)
+        #
+        # x = []
+        # y = []
+        # for i in range(100, len(data)):
+        #     x.append(data[i - 100:i])
+        #     y.append(data[i])
+        #
+        # x, y = np.array(x), np.array(y)
+        # x, y = pd.DataFrame(x), pd.DataFrame(y)
 
         train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=split, shuffle=False, random_state=0)
 
