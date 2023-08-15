@@ -40,6 +40,7 @@ class REGDataGathering():
 
         X_forecast = x.iloc[-1, :]
         current = x.index[-1]
+
         tomorrow = self.get_next_weekday(current)
         x = x.iloc[:-1, :]
         y = y.iloc[1:]

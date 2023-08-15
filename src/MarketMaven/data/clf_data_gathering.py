@@ -30,7 +30,8 @@ class CLFDataGathering():
         return data.ewm(alpha=alpha).mean()
 
     def data_preprocess(self, data):
-        indi = ['RSI', 'MACD', 'STOCH', 'ADL', 'ATR', 'MOM', 'MFI', 'ROC', 'OBV', 'CCI', 'EMV', 'VORTEX']
+        #indi = ['RSI', 'MACD', 'STOCH', 'ADL', 'ATR', 'MOM', 'MFI', 'ROC', 'OBV', 'CCI', 'EMV', 'VORTEX']
+        indi = ['SMA', 'STOCHRSI', 'PIVOT_FIB']
 
         for i in indi:
             d = eval('TA.' + i + '(data)')
@@ -39,12 +40,12 @@ class CLFDataGathering():
             data = data.merge(d, left_index=True, right_index=True)
         data.rename(columns={"14 period EMV.": '14 period EMV'}, inplace=True)
 
-        data['NormVol'] = data['Volume'] / data['Volume'].ewm(5).mean()
-
-        data['e5'] = data['Close'] / data['Close'].ewm(5).mean()
-        data['e15'] = data['Close'] / data['Close'].ewm(14).mean()
-        data['e21'] = data['Close'] / data['Close'].ewm(21).mean()
-        data['e50'] = data['Close'] / data['Close'].ewm(50).mean()
+        # data['NormVol'] = data['Volume'] / data['Volume'].ewm(5).mean()
+        #
+        # data['e5'] = data['Close'] / data['Close'].ewm(5).mean()
+        # data['e15'] = data['Close'] / data['Close'].ewm(14).mean()
+        # data['e21'] = data['Close'] / data['Close'].ewm(21).mean()
+        # data['e50'] = data['Close'] / data['Close'].ewm(50).mean()
 
         pred = (data.shift(-1)['Close'] >= data['Close'])
         data['Pred'] = pred.astype(int)
