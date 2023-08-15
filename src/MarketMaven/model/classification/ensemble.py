@@ -1,3 +1,4 @@
+import pickle
 from sklearn.ensemble import VotingClassifier
 from MarketMaven.model.classification.knn import Model_KNN
 from MarketMaven.model.classification.random_forest import Model_RandomForest
@@ -11,11 +12,21 @@ class Model_ENSEMBLE:
         self.test_y = test_y
         self.X_forecast = X_forecast
 
-    def model(self):
+    def train(self):
         rf = Model_RandomForest(self.train_x, self.train_y)
         rf_model = rf.model()
+        pickle.dump(rf_model, open("src/MarketMaven/pt_h5_pkl/rf.pickle", "wb"))
+
         knn = Model_KNN(self.train_x, self.train_y)
         knn_model = knn.model()
+        pickle.dump(knn_model, open("src/MarketMaven/pt_h5_pkl/knn.pickle", "wb"))
+
+        return
+
+
+    def test(self):
+        rf_model = pickle.load(open("src/MarketMaven/pt_h5_pkl/rf.pickle", "rb"))
+        knn_model = pickle.load(open("src/MarketMaven/pt_h5_pkl/knn.pickle", "rb"))
 
         estimators = [('knn', knn_model), ('rf', rf_model)]
         ensemble = VotingClassifier(estimators, voting='hard')
