@@ -105,10 +105,11 @@ class Model_LSTM_CNN(nn.Module):
                     self.load_state_dict(best_model_state)
                 break
 
-        torch.save(self, "src/MarketMaven/pt_h5/cnn.pt")
+        torch.save(self, "src/MarketMaven/pt_h5_pkl/cnn.pt")
+        return
 
     def test_cnn(self):
-        model = torch.load("src/MarketMaven/pt_h5/cnn.pt")
+        model = torch.load("src/MarketMaven/pt_h5_pkl/cnn.pt")
         model.eval()
         with torch.no_grad():
             predictions_scaled = model(self.test_x_tensor.unsqueeze(1))

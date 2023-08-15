@@ -100,10 +100,11 @@ class Model_LSTM_GRU(nn.Module):
                     self.load_state_dict(best_model_state)
                 break
 
-        torch.save(self, "src/MarketMaven/pt_h5/lstm_gru_rnn.pt")
+        torch.save(self, "src/MarketMaven/pt_h5_pkl/lstm_gru_rnn.pt")
+        return
 
     def test_gru_rnn(self):
-        model = torch.load("src/MarketMaven/pt_h5/lstm_gru_rnn.pt")
+        model = torch.load("src/MarketMaven/pt_h5_pkl/lstm_gru_rnn.pt")
         model.eval()
         self.eval()
         with torch.no_grad():

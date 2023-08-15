@@ -87,10 +87,11 @@ class Model_LSTM_RNN(nn.Module):
                     self.load_state_dict(best_model_state)
                 break
 
-        torch.save(self, "src/MarketMaven/pt_h5/lstm_rnn.pt")
+        torch.save(self, "src/MarketMaven/pt_h5_pkl/lstm_rnn.pt")
+        return
 
     def test_rnn(self):
-        model = torch.load("src/MarketMaven/pt_h5/lstm_rnn.pt")
+        model = torch.load("src/MarketMaven/pt_h5_pkl/lstm_rnn.pt")
         model.eval()
         with torch.no_grad():
             predictions_scaled = model(self.test_x_tensor.unsqueeze(1))
