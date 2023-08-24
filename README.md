@@ -10,9 +10,9 @@ Predict Stock Market Prices
 
     $ python -m venv mmenv
 
-    $ source mmenv/bin/activate               [LINUX/MAC]
+    $ source mmenv/bin/activate                # [LINUX/MAC]
 
-    $ .\mmenv\Scripts\activate                 [WINDOWS]
+    $ .\mmenv\Scripts\activate                 # [WINDOWS]
 
     $ pip install -r src/requirements.txt
 
@@ -23,8 +23,9 @@ Predict Stock Market Prices
    $ python .\src\main.py
 
    Note: If the models are not present in (.\src\MarketMaven\pt_h5_pkl\) directory,
-         or if you want to retrain the model for some other stock, or the
-         current models has become outdated and giving wrong predictions
+         or if you want to retrain the model for some other stock (In this case modify 
+         the "company_name" variable with the respective ticker symbol in "main.py"), 
+         or the current models has become outdated and giving wrong predictions
          for the AAPL stock, you can retrain the model by doing some modifications
          in the "main.py" file, by setting the "tt_switch" variable to 0.
          (0 for training the model and 1 for testing the model). Also, you
