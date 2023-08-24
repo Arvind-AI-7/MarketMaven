@@ -16,6 +16,8 @@ Predict Stock Market Prices
 
     $ pip install -r src/requirements.txt
 
+    $ mkdir .\src\MarketMaven\pt_h5_pkl        # For storing the models
+
 3. Run the code:
 
    $ python .\src\main.py
