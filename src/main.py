@@ -8,7 +8,7 @@ warnings.filterwarnings("ignore")
 
 if __name__ == '__main__':
 
-    tt_switch = 1  # 0 for train / 1 for test
+    tt_switch = 0  # 0 for train / 1 for test
 
     # Regression
     print("******************************* Regression *******************************")
