@@ -13,5 +13,5 @@ tensorflow==2.13.0
 Keras-Preprocessing==1.1.2
 h5py==3.9.0
 torchviz==0.0.2
-
+psutil==5.9.5
 

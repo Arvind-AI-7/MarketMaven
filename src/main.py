@@ -8,17 +8,17 @@ warnings.filterwarnings("ignore")
 
 if __name__ == '__main__':
 
-    # Train-Test Switch
-    tt_switch = 1   # 0 for train / 1 for test
+    tt_switch = 1  # 0 for train / 1 for test
 
     # Regression
+    print("******************************* Regression *******************************")
     data_gathering = REGDataGathering(company_name='AAPL')
     train_x, test_x, train_y, test_y, X_forecast, tomorrow = data_gathering.get_data(years=5, split=0.10) # years,train_test_split
     get_predictions = Get_Predictions(train_x, test_x, train_y, test_y, X_forecast, tomorrow, tt_switch)
     get_predictions.reg_pred()
 
     # Classification
-    tt_switch = 1   # 0 for train / 1 for test
+    print("***************************** Classification *****************************")
     data_gathering = CLFDataGathering(company_name='AAPL')
     train_x, test_x, train_y, test_y, X_forecast, tomorrow = data_gathering.get_data(years=5, split=0.10)  # years,train_test_split
     get_predictions = Get_Predictions(train_x, test_x, train_y, test_y, X_forecast, tomorrow, tt_switch)
@@ -26,9 +26,6 @@ if __name__ == '__main__':
 
 
     # Sentiment Analysis
-    tt_switch = 1   # 0 for train / 1 for test
+    print("*************************** Sentiment Analysis ***************************")
     get_predictions = Get_Predictions(train_x, test_x, train_y, test_y, X_forecast, tomorrow, tt_switch)
     get_predictions.sent_pred()
-
-
-
